@@ -14,11 +14,11 @@ public:
 	int get_month() const;     // get the month
 	int get_day() const;       // get the day
 	void next();               // advance to next day
+	static int daysPerMonth[12]; // number of days in each month
 private:
 	int year;  // the year (four digits)
 	int month; // the month (1-12)
 	int day;   // the day (1-..)
-	static int daysPerMonth[12]; // number of days in each month
 };
 
 /*

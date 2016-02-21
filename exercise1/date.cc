@@ -8,6 +8,7 @@
 #include <ctime>   /* for C routines time and localtime */
 #include <iostream>
 #include <utility> /* for swap */
+#include <stdlib.h> 
 
 using namespace std;
 
@@ -21,21 +22,37 @@ Date::Date() {
 	day = locTime->tm_mday;
 }
 
-Date::Date(int y, int m, int d) {}
+Date::Date(int y, int m, int d) {
+	year = y;
+	month = m;
+	day = d;
+}
 
 int Date::get_year() const {
-	return 0;
+	return year;
 }
 
 int Date::get_month() const {
-	return 0;
+	return month;
 }
 
 int Date::get_day() const {
-	return 0;
+	return day;
 }
 
 void Date::next() {
+	if (day == daysPerMonth[month-1] && month != 12) {
+		day = 1;
+		++month;
+	}
+	else if (day == daysPerMonth[month-1] && month == 12) {
+		day = 1;
+		month = 1;
+		++year;
+	}
+	else {
+		++day;
+	}
 }
 
 void print(const Date& d) {
@@ -58,5 +75,21 @@ bool operator<(const Date& d1, const Date& d2) {
 }
 
 int distance(const Date& d1, const Date& d2) {
-	return 0;
+	int days1 = 0;
+	int days2 = 0;
+
+	days1 += d1.get_year() * 365;
+	days1 += d1.get_day();
+	for (int i = 0; i < d1.get_month(); i++) {
+		days1 += d1.daysPerMonth[i];
+	}
+
+	days2 += d2.get_year() * 365;
+	days2 += d2.get_day();
+	for (int i = 0; i < d2.get_month(); i++) {
+		days2 += d2.daysPerMonth[i];
+	}
+
+
+	return abs(days1 - days2);
 }
