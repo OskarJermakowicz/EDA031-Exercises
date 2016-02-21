@@ -36,4 +36,8 @@
 *.sdf
 *.sln
 *.vcxproj
+*.vcxproj.user
 *.vcxproj.filters
+*.VC
+*.VC.opendb
+
